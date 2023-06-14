@@ -5,8 +5,7 @@
 #define NODE_NAME "robot_controller_node"
 
 #define ANGULAR_RAD      10
-#define ANGULAR_FACTOR 1.0f
-#define LINEAR_FACTOR  1.0f
+#define SPEED_MULTI    0.1f // Speed multiplier to derive duty
 #define MAX_DUTY_CYCLE 1.0f
 #define MIN_DUTY_CYCLE 0.6f
 
@@ -17,11 +16,14 @@
 ros::Publisher duty_cycle_pub;
 
 void calculatePWM(float lin_vel, float ang_vel) {
+    ang_vel *= ANGULAR_RAD; // Angular to linear velocity
     // Because its not possible to move with the accuracy of any unit, we try to at
     // least ensure linear and angular velocity is approximately proportional
     // +ve duty cycle: forward; -ve duty cycle: backward
-    float left_wheel_duty_cycle = lin_vel*LINEAR_FACTOR - ang_vel*ANGULAR_RAD*ANGULAR_FACTOR,
-          right_wheel_duty_cycle = lin_vel*LINEAR_FACTOR + ang_vel*ANGULAR_RAD*ANGULAR_FACTOR;
+    float left_wheel_duty_cycle = lin_vel - ang_vel,
+          right_wheel_duty_cycle = lin_vel + ang_vel;
+    left_wheel_duty_cycle *= SPEED_MULTI;
+    right_wheel_duty_cycle *= SPEED_MULTI;
  
     // Construct pub msg according to format "left_wheel_duty_cycle,right_wheel_duty_cycle"
     std_msgs::String duty_cycle_command;
