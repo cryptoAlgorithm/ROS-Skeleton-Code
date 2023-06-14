@@ -49,7 +49,7 @@ void subCallback(const geometry_msgs::Twist::ConstPtr& msg) {
 }
 
 int main(int argc, char **argv) {
-    ros::init(argc, argv, NODE_NAME);
+    ros::init(argc, argv, NODE_NAME, ros::init_options::AnonymousName);
     ROS_INFO("Started "NODE_NAME"!");
 
     ros::NodeHandle n;
