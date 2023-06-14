@@ -7,7 +7,7 @@
 #define ANGULAR_RAD      10
 #define SPEED_MULTI    0.1f // Speed multiplier to derive duty
 #define MAX_DUTY_CYCLE 1.0f
-#define MIN_DUTY_CYCLE 0.6f
+#define MIN_DUTY_CYCLE 0.0f
 
 #define MIN(a, b) (a < b ? a : b)
 #define MAX(a, b) (a > b ? a : b)
