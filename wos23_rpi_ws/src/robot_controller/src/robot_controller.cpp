@@ -16,8 +16,7 @@
 
 ros::Publisher duty_cycle_pub;
 
-void calculatePWM(float lin_vel, float ang_vel)
-{
+void calculatePWM(float lin_vel, float ang_vel) {
     // Because its not possible to move with the accuracy of any unit, we try to at
     // least ensure linear and angular velocity is approximately proportional
     // +ve duty cycle: forward; -ve duty cycle: backward
@@ -34,13 +33,12 @@ void calculatePWM(float lin_vel, float ang_vel)
     ROS_INFO("Published duty cycle (L,R): %s", duty_cycle_command.data.c_str());
 }
 
-void subCallback(const geometry_msgs::Twist::ConstPtr& msg)
-{
+void subCallback(const geometry_msgs::Twist::ConstPtr& msg) {
     // only the following 2 fields of the msg are used 
     // the rest are all 0
     // "Ok good to know"
-    float linear_vel = msg->linear.x;
-    float angular_vel = msg->angular.z;
+    float linear_vel = msg->linear.x,
+          angular_vel = msg->angular.z;
 
     ROS_INFO("Received velocity command: [lin_vel = %f] [ang_vel = %f]", linear_vel, angular_vel);
     // ROS_INFO("Received keyboard command!");
@@ -48,8 +46,7 @@ void subCallback(const geometry_msgs::Twist::ConstPtr& msg)
     calculatePWM(linear_vel, angular_vel);
 }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
     ros::init(argc, argv, NODE_NAME);
     ROS_INFO("Started "NODE_NAME"!");
 
