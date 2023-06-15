@@ -31,7 +31,7 @@ void calculatePWM(float lin_vel, float ang_vel) {
         std::to_string(CLAMP(left_wheel_duty_cycle, MIN_DUTY_CYCLE, MAX_DUTY_CYCLE))
         + ","
         + std::to_string(CLAMP(right_wheel_duty_cycle, MIN_DUTY_CYCLE, MAX_DUTY_CYCLE));
-    duty_cycle_pub.publish(duty_cycle_msg);
+    duty_cycle_pub.publish(duty_cycle_command);
     ROS_INFO("Published duty cycle (L,R): %s", duty_cycle_command.data.c_str());
 }
 
@@ -50,7 +50,7 @@ void subCallback(const geometry_msgs::Twist::ConstPtr& msg) {
 
 int main(int argc, char **argv) {
     ros::init(argc, argv, NODE_NAME, ros::init_options::AnonymousName);
-    ROS_INFO("Started "NODE_NAME"!");
+    ROS_INFO("Started " NODE_NAME "!");
 
     ros::NodeHandle n;
 
