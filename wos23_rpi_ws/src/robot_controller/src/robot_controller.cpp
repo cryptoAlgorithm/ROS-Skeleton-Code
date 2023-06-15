@@ -24,7 +24,7 @@ void calculatePWM(float lin_vel, float ang_vel) {
           right_wheel_duty_cycle = lin_vel + ang_vel;
     left_wheel_duty_cycle *= SPEED_MULTI;
     right_wheel_duty_cycle *= SPEED_MULTI;
- 
+
     // Construct pub msg according to format "left_wheel_duty_cycle,right_wheel_duty_cycle"
     std_msgs::String duty_cycle_command;
     duty_cycle_command.data =
