@@ -159,21 +159,13 @@ if __name__=="__main__":
         while(1):
             key = getKey(key_timeout)
 
-            if key == 'w':
-                print('Forward')
+            if key in ['w', 's']:
+                print('Forward' if key == 'w' else 'Backward')
                 if lin != speed:
                     lin = speed
                     ang = 0
                 else:
-                    speed += VELOCITY_STEP
-                    lin = speed
-            elif key == 's':
-                print('Backward')
-                if lin != speed:
-                    lin = speed
-                    ang = 0
-                else:
-                    speed -= VELOCITY_STEP
+                    speed += VELOCITY_STEP if key == 'w' else -VELOCITY_STEP
                     lin = speed
             elif key == 'a': # Rotate wheels the opposite direction of each other such that there is minimal linear motion
                 print('In place left')
