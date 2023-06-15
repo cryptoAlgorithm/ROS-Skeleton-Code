@@ -13,30 +13,20 @@ import sys, select, termios, tty
 
 
 VELOCITY_STEP = 0.1
-ANGULAR_RAD   =  10
 
 msg = """
-Reading from the keyboard  and Publishing to Twist!
----------------------------
-Moving around:
-   u    i    o
-   j    k    l
-   m    ,    .
+ /-----------------\\
+ |  Q  |  W  |  E  |
+ |-----|-----|-----|
+ |  A  |  S  |  D  |
+ \\-----------------/
 
-For Holonomic mode (strafing), hold down the shift key:
----------------------------
-   U    I    O
-   J    K    L
-   M    <    >
-
-t : up (+z)
-b : down (-z)
-
-anything else : stop
-
-q/z : increase/decrease max speeds by 0.1
-w/x : increase/decrease only linear speed by 0.1
-e/c : increase/decrease only angular speed by 0.1
+Q = Twist left
+E = Twist right
+W = Forwards
+S = Backwards
+A = Increase angular velocity
+D = Decrease angular velocity
 
 CTRL-C to quit
 """
@@ -136,7 +126,7 @@ def getKey(key_timeout):
 
 
 def vels(speed, turn):
-    return "currently:\tlinear %.1f\tangular %.1f" % (speed,turn)
+    return "Velocities:\tlinear %.1f\tangular %.1f" % (speed,turn)
 
 if __name__=="__main__":
     settings = termios.tcgetattr(sys.stdin)
